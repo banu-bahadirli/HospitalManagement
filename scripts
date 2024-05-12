@@ -1,0 +1,82 @@
+USE Hospital
+GO
+
+CREATE TABLE Buildings (
+    [BuildingId] INT IDENTITY(1,1) PRIMARY KEY,
+    [BuildingName] VARCHAR(50));
+
+	GO
+
+  CREATE TABLE Rooms (
+    [RoomId] INT IDENTITY(1,1) PRIMARY KEY,
+    [RoomName] VARCHAR(50),
+    [BuildingId] INT,
+	CONSTRAINT UK_RoomName_BuildingId UNIQUE(RoomName, BuildingId),
+    FOREIGN KEY (BuildingId) REFERENCES Buildings (BuildingId)
+	ON DELETE CASCADE);
+
+	GO
+CREATE TABLE Stores (
+    [StoreId] INT IDENTITY(1,1) PRIMARY KEY,
+    [StoreName] VARCHAR(50),
+    [BuildingId] INT,
+    FOREIGN KEY (BuildingId) REFERENCES Buildings (BuildingId)
+	ON DELETE CASCADE);
+
+
+    GO
+
+CREATE TABLE [dbo].[Products](
+	[ProductId] INT IDENTITY(1,1) PRIMARY KEY,
+	[ProductCode] [varchar](50) NULL,
+	[ProductName] [varchar](50) NULL)
+	
+	GO
+	
+CREATE TABLE [dbo].[ProductStores](
+	[ProductStoreId] INT IDENTITY(1,1) PRIMARY KEY,
+	[StoreId] INT,
+	[ProductId] INT,
+    FOREIGN KEY (ProductId) REFERENCES Products(ProductId),
+    FOREIGN KEY (StoreId) REFERENCES Stores(StoreId))
+	
+	GO
+	CREATE TABLE [dbo].[Users](
+	[Id] [INT]  IDENTITY(1,1) PRIMARY KEY,
+	[FirstName] [VARCHAR](50) NULL,
+	[Email] [VARCHAR](50) NULL,
+	[PasswordSalt] [VARBINARY](500) NULL,
+	[PasswordHash] [VARBINARY](500) NULL,
+	[LastName] [VARCHAR](50) NULL,
+	[Status] [BIT] NULL)
+
+
+GO
+CREATE TABLE [dbo].[Roles](
+	[Id] INT IDENTITY(1,1) PRIMARY KEY,
+	[Name] [VARCHAR](500) NULL)
+	
+	GO
+	
+	CREATE TABLE [dbo].[UserRoles](
+	[Id]  INT IDENTITY(1,1) PRIMARY KEY,
+	[UserId] [BIGINT] NULL,
+	[RoleId] [INT] NULL)
+
+GO
+INSERT INTO [dbo].[Roles]
+           ([Name])
+     VALUES('Admin')
+GO
+
+
+INSERT INTO [dbo].[Roles]
+           ([Name])
+     VALUES('Developer')
+GO
+
+INSERT INTO [dbo].[UserRoles]
+           ([UserId]
+           ,[RoleId])
+     VALUES(1 ,1)
+
