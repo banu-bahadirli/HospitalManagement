@@ -1,0 +1,52 @@
+﻿@model IEnumerable<WebUI.Models.ProductViewModel>
+
+@{
+	ViewData["Title"] = "Index";
+}
+
+<h1>Ürün Listesi</h1>
+
+<p>
+	<a asp-action="Create">Ürün Ekle</a>
+
+</p>
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.ProductId)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.ProductCode)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.ProductName)
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@if (Model != null)
+		{
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>
+
+						@Html.DisplayFor(modelItem => item.ProductId)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.ProductCode)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.ProductName)
+					</td>
+					<td>
+						@Html.ActionLink("Güncelle", "Edit", new { id=item.ProductId }) |
+						@Html.ActionLink("Sil", "Delete", new { id=item.ProductId })
+					</td>
+				</tr>
+			}
+		}
+	</tbody>
+</table>

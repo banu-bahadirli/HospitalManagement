@@ -1,0 +1,45 @@
+﻿@model IEnumerable<WebUI.Models.StoreViewModel>
+
+@{
+	ViewData["Title"] = "Index";
+}
+
+<h1>Depo Listesi</h1>
+
+<p>
+	<a asp-action="Create">Depo Ekle</a>
+</p>
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.StoreName)
+			</th>
+
+			<th>
+				@Html.DisplayNameFor(model => model.BuildingName)
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@if (Model != null)
+		{
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>
+						@Html.DisplayFor(modelItem => item.StoreName)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.BuildingName)
+					</td>
+					<td>
+						@Html.ActionLink("Güncelle", "Edit", new { id=item.StoreId }) |
+						@Html.ActionLink("Sil", "Delete", new { id=item.StoreId })
+					</td>
+				</tr>
+			}
+		}
+	</tbody>
+</table>

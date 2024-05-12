@@ -1,0 +1,38 @@
+﻿@model IEnumerable<WebUI.Models.BuildingViewModel>
+
+@{
+	ViewData["Title"] = "Index";
+}
+
+<h1>Bina Listesi</h1>
+
+<p>
+	<a asp-action="Create">Bina Ekle</a>
+</p>
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.BuildingName)
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+	@if(Model != null)
+		{
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>
+						@Html.DisplayFor(modelItem => item.BuildingName)
+					</td>
+					<td>
+						@Html.ActionLink("Güncelle", "Edit", new {  id=item.BuildingId }) |
+						@Html.ActionLink("Sil", "Delete", new {id=item.BuildingId })
+					</td>
+				</tr>
+			}
+		}
+	</tbody>
+</table>

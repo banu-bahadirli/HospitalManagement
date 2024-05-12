@@ -1,0 +1,45 @@
+﻿@model WebUI.Models.RoomViewModel
+@{
+	ViewData["Title"] = "Edit";
+}
+
+<h1>Oda Güncelle</h1>
+
+
+<hr />
+<div class="row">
+	<div class="col-md-4">
+		@Html.HiddenFor(model => model.RoomId)
+		<form asp-action="Edit">
+			@Html.HiddenFor(model => model.RoomId)
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<div class="form-group">
+				@Html.HiddenFor(model => model.RoomId)
+				<label asp-for="RoomName" class="control-label">Oda Adi</label>
+				<input asp-for="RoomName" class="form-control" />
+				<span asp-validation-for="RoomName" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="BuildingId" class="control-label">Bina Adı</label>
+				<span asp-validation-for="BuildingId" class="text-danger"></span>
+				<select asp-for="BuildingId" runat="server" class="form-control" asp-items="ViewBag.BuildingNameList">
+				</select>
+
+			</div>
+			<br />
+			<div class="form-group">
+				<input type="submit" value="Kaydet" class="btn btn-primary" />
+			</div>
+		</form>
+	</div>
+</div>
+
+<div>
+	<a asp-action="Index">Oda Listesine Dön</a>
+</div>
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}

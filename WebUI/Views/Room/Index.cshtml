@@ -1,0 +1,51 @@
+﻿@model IEnumerable<WebUI.Models.RoomViewModel>
+
+@{
+	ViewData["Title"] = "Index";
+}
+
+<h1>Oda Listesi</h1>
+
+<p>
+	<a asp-action="Create">Oda Ekle</a>
+</p>
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.RoomId)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.RoomName)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.BuildingName)
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@if (Model != null)
+		{
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>
+						@Html.DisplayFor(modelItem => item.RoomId)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.RoomName)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.BuildingName)
+					</td>
+					<td>
+						@Html.ActionLink("Güncelle", "Edit", new { id=item.RoomId}) |
+						@Html.ActionLink("Sil", "Delete", new { id=item.RoomId})
+					</td>
+				</tr>
+			}
+		}
+
+	</tbody>
+</table>
